@@ -3,5 +3,29 @@
 {% block title %} Contact {% endblock title %}
 
 {% block body %}
-<h3>Contact</h3>
+
+<div class="container my-3">
+    
+    <h3>Contact SavageCoder Admin</h3>
+    <form method="post" action="/contact/"> {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="phone" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+        </div>
+        <div class="form-group">
+            <label for="content">Describe your issue</label>
+            <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+    </form>
+</div>
+
 {% endblock body %}
