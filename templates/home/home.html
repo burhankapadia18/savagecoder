@@ -6,9 +6,11 @@
 
 {% block body %}
 
+{% if not user.is_authenticated %}
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
+        {% endif %}
             <div class="container my-3">
                 <div class="jumbotron">
                 <h1 class="display-4">Welcome to SavageCoder!</h1>
@@ -18,7 +20,6 @@
                 <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
                 </div>
             </div>
-
             <div class="container">
                 <h2>Popular Blogposts</h2>
                 <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
@@ -34,14 +35,15 @@
                     </div>
                 </div>
             </div>
+        {% if not user.is_authenticated %}
         </div>
         <div class="col-sm-4">
-            <form class="form-signin">
+            <form class="form-signin" action="/login/" method='post'>   {% csrf_token %}
                 <h1 class="h3 mb-3 font-weight-normal">sign in</h1>
-                <label for="inputEmail" class="sr-only">Username</label>
-                <input type="text" id="username" class="form-control" placeholder="Username" required="" autofocus="">
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                <label for="loginusername" class="sr-only">Username</label>
+                <input type="text" id="loginusername" name="loginusername" class="form-control" placeholder="Username" required autofocus="">
+                <label for="loginpassword" class="sr-only">Password</label>
+                <input type="password" id="loginpassword" name="loginpassword" class="form-control" placeholder="Password" required>
                 <div class="checkbox mb-3">
                     <label>
                     <input type="checkbox" value="remember-me"> Remember me
@@ -53,5 +55,6 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 {% endblock body %}
