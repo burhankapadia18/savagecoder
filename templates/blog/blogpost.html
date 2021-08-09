@@ -13,4 +13,19 @@
         <hr>
     </div>
 </div>
+<div class="container">
+    <form action="/blog/postComment" method="post"> {% csrf_token %}
+        <input type="text" name="comment" placeholder="enter your comment here">
+        <input type="hidden" name="post_sno" value="{{post.sno}}" >
+        <input type="submit" value="Submit">
+    </form>
+    <div class="row my-3">
+        <div class="col-md-2">
+        img here
+        </div>
+        <div class="col-md-10">
+        comment here
+        </div>
+    </div>
+</div>
  {% endblock %}

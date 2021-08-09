@@ -7,13 +7,12 @@ from django.contrib import messages
 
 # Create your views here.
 
+# html pages
 def home(request):
     return render(request, 'home/home.html')
 
-
 def about(request):
     return render(request, 'home/about.html')
-
 
 def contact(request):
     if request.method == 'POST':
@@ -51,7 +50,7 @@ def search(request):
     messages.success(request, f'found {len(allPost)} blog(s) related to your search')
     return render(request, 'home/search.html', params)
 
-
+# Authentication API's
 def signUp(request):
     if request.method == 'POST':
         # get the entries
@@ -84,7 +83,6 @@ def signUp(request):
     else:   
         return render(request,'home/signup.html')
 
-
 def handleLogin(request):
     if request.method == 'POST':
         # get the username and password
@@ -100,7 +98,6 @@ def handleLogin(request):
             messages.error(request, "Invalid Username or Password")
             return redirect('home')
     return HttpResponse('404 - Not Found')
-
 
 def handleLogout(request):
     logout(request)
