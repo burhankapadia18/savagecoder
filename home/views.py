@@ -4,6 +4,7 @@ from blog.models import Post
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -102,4 +103,4 @@ def handleLogin(request):
 def handleLogout(request):
     logout(request)
     messages.success(request, "Logged Out Successfully")
-    return redirect('home')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))   # redirects to the page where it has been made to logout

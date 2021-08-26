@@ -22,10 +22,17 @@ def postComment(request):
     if request.method == 'POST':
         comment=request.POST.get('comment')
         user=request.user
-        post_sno =request.POST.get('post_sno')
+        post_sno = request.POST.get('postSno')
         post= Post.objects.get(sno=post_sno)
-        comment=BlogComment(comment= comment, user=user, post=post)
-        comment.save()
-        messages.success(request, "Your comment has been posted successfully")
+        parentComment_sno = request.POST.get('parentSno')
+        if parentComment_sno == "":
+            comment = BlogComment(comment= comment, user=user, post=post)
+            comment.save()
+            messages.success(request, "Your comment has been posted successfully")
+        else:
+            parentComment = BlogComment.objects.get(sno=parentComment_sno)
+            comment = BlogComment(comment= comment, user=user, post=post, parent=parentComment)
+            comment.save()
+            messages.success(request, "Your reply has been posted successfully")
         
         return redirect(f"/blog/{post.slug}")
