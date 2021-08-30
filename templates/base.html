@@ -45,6 +45,13 @@
                     </div>
                 </li>
                 </ul>
+                {% else %}
+                <ul class="navbar-nav mr-2">
+                <li class="nav-item">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#loginsignupModal">Login/Signup</button>
+                </li>
+                </ul>
                 {% endif %}
                 <form method="get" action="/search/" class="my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="query" name="query">
@@ -53,6 +60,37 @@
             </div>
         </div>
     </nav>
+
+    <!-- Modal for login/signup -->
+    <div class="modal fade" id="loginsignupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Login to SavageCoder</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <form class="form-signin" action="/login/" method='post'>   {% csrf_token %}
+                    <label for="loginusername" class="sr-only">Username</label>
+                    <input type="text" id="loginusername" name="loginusername" class="form-control my-2" placeholder="Username" required autofocus="">
+                    <label for="loginpassword" class="sr-only">Password</label>
+                    <input type="password" id="loginpassword" name="loginpassword" class="form-control my-2" placeholder="Password" required>
+                    <div class="checkbox mb-3">
+                        <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                </form>
+                <p class="text-center my-3">don't have an account? <a href="/signup">Sign up</a></p>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
 
     {% for message in messages %}
     <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-0" role="alert">
@@ -64,6 +102,8 @@
     {% endfor %}
 
     {% block body %}{% endblock body %}
+
+    {% block js %}{% endblock js %}
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

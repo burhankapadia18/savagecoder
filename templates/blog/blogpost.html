@@ -9,7 +9,7 @@
     <div class="blog-post">
         <h1 class="blog-post-title">{{post.title}}</h1>
         <p class="blog-post-meta">{{post.timeStamp}} by <a href="/about">{{post.author}}</a></p>
-        <p>{{post.content}}</p>
+        <p>{{post.content | safe}}</p>
         <hr>
     </div>
 </div>
@@ -27,7 +27,7 @@
             </div>
             <input type="hidden" name="postSno" value="{{post.sno}}">
             <input type="hidden" name="parentSno" value="">
-            <button type="submit" class="btn btn-outline-warning">Comment</button>
+            <button type="submit" class="btn btn-light">Comment</button>
         </form>
     {% else %}
         <h5><span class="badge badge-info">Please login to Comment on the post</span></h5>
@@ -36,7 +36,7 @@
     {% for comment in comments %}
         <div class="row my-3 mx-0 border-bottom border-secondary">
             <div class="col-md-1">
-            <img class="rounded mx-auto d-block w-100 p-2" src="/static/img/user.png"  alt="user">
+            <img class="rounded mx-auto d-block w-100 p-1" src="/static/img/user.png"  alt="user">
             </div>
             <div class="col-md-11">
                 <b>{{comment.user.username}}</b> <span class="font-weight-lighter">{{comment.timestamp | naturaltime}}</span>
@@ -64,8 +64,15 @@
                 <div class="replies my-1">
                     {% for reply in replies|get_val:comment.sno %}
                     <div class="container my-1">
-                    <b>{{reply.user.username}}</b> replied <span class="font-weight-lighter">{{reply.timestamp | naturaltime}}</span>
-                    <div>{{reply.comment}}</div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img class="rounded mx-auto d-block w-75" src="/static/img/user.png"  alt="user">
+                            </div>
+                            <div class="col-md-11">
+                                <b>{{reply.user.username}}</b> replied <span class="font-weight-lighter">{{reply.timestamp | naturaltime}}</span>
+                                <div>{{reply.comment}}</div>
+                            </div>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>

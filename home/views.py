@@ -94,10 +94,12 @@ def handleLogin(request):
         if user is not None:
             login(request,user)
             messages.success(request, "Successfully Logged In")
-            return redirect('home')
+            # return redirect('home')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             messages.error(request, "Invalid Username or Password")
-            return redirect('home')
+            # return redirect('home')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return HttpResponse('404 - Not Found')
 
 def handleLogout(request):
