@@ -8,7 +8,7 @@
 <div class="container my-3">
     <div class="blog-post">
         <h1 class="blog-post-title">{{post.title}}</h1>
-        <p class="blog-post-meta">{{post.timeStamp}} by <a href="/about">{{post.author}}</a></p>
+        <p class="blog-post-meta">{{post.timeStamp}} by <a href="/about">{{post.author}}</a> <span><i class="fa fa-eye"></i> {{post.views}}</span></p>
         <p>{{post.content | safe}}</p>
         <hr>
     </div>
