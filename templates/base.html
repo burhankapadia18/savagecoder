@@ -44,6 +44,7 @@
                     {{request.user}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" data-toggle="modal" data-target="#changePasswordModal">Change Password</a>
                     <a class="dropdown-item" href="/logout/">Logout</a>
                     </div>
                 </li>
@@ -89,6 +90,26 @@
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                 </form>
                 <p class="text-center my-3">don't have an account? <a href="/signup">Sign up</a></p>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal for passwordChange -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-body">
+            <div class="container">
+                <form class="form-signin" action="/changePass/" method='post'>   {% csrf_token %}
+                    <label for="oldPass" class="sr-only">Enter old Password</label>
+                    <input type="password" id="oldPass" name="oldPass" class="form-control my-2" placeholder="Old Password" required>
+                    <label for="newPass" class="sr-only">Enter new Password</label>
+                    <input type="password" id="newPass" name="newPass" class="form-control my-2" placeholder="new Password" required>
+                    <input type="hidden" id="username" name="username" value="{{request.user}}">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Change Password</button>
+                </form>
             </div>
         </div>
         </div>

@@ -106,3 +106,19 @@ def handleLogout(request):
     logout(request)
     messages.success(request, "Logged Out Successfully")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))   # redirects to the page where it has been made to logout
+
+def changePassword(request):
+    if request.method == 'POST':
+        # get old and new password
+        oldpass = request.POST['oldPass']
+        newPass = request.POST['newPass']
+        username = request.POST['username']
+        user = authenticate(username=username, password=oldpass)
+        if user is not None:
+            user.set_password(newPass)
+            messages.success(request, "Password Changed Successfully, Please login back with new password")
+            user.save()
+        else:
+            messages.error(request, "Password Incorrect")
+        print(oldpass, newPass, username)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))   # redirects to the page where it has been made to logout
